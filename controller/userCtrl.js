@@ -30,12 +30,10 @@ module.exports = {
                 resp.send("用户已存在，注册失败");
             }else{
                 // 用户不存在
-                userDao.addUser(phone, pwd, birthDay, gender, school, function(err){
+                userDao.addUser(phone, pwd, birthDay, gender, school, function(err, res){
                     if(!err){
                         // 初始化每个新用户username为_id
-                        userDao.getUser({phone: phone}, "_id", function(err, res){
-                            userDao.updateUser({phone: phone}, {username: res._id}, function(err, isSuccess){})
-                        })
+                        userDao.updateUser({phone: phone}, {username: res._id}, function(err, isSuccess){})
                         console.log("用户插入成功");
                         resp.send("注册成功");
                     }
@@ -44,6 +42,17 @@ module.exports = {
         })
 
     },
+    /**
+     * @api {post} /userLogin 用户登录
+     * @apiName userLogin
+     * @apiGroup User
+     *
+     * @apiParam {String} phone 电话号码
+     * @apiParam {String} pwd 密码
+     * 
+     * @apiSuccess {String} LoginSuccess _id
+     * @apiError {String} LoginFailed "登录失败"
+     */
     userLogin(req, resp){
         console.log("路由userLogin成功");
         var phone = req.body.phone;
@@ -62,6 +71,16 @@ module.exports = {
             }
         })
     },
+    /**
+     * @api {get} /getUser 获取用户信息
+     * @apiName getUser
+     * @apiGroup User
+     *
+     * @apiParam {String} _id 用户ID
+     * @apiParam {String} projection 需要的字段投影
+     * 
+     * @apiSuccess {String} Success projection
+     */
     getUser(req, resp){
         console.log("路由getUser成功");
         var _id = req.query._id;
@@ -74,6 +93,24 @@ module.exports = {
             }
         })
     },
+    /**
+     * @api {post} /updateUser 更新用户信息
+     * @apiName updateUser
+     * @apiGroup User
+     *
+     * @apiParam {String} _id 用户ID
+     * @apiParam {String} username 用户名
+     * @apiParam {String} pwd 密码
+     * @apiParam {String} birthDay 生日
+     * @apiParam {String} gender 性别
+     * @apiParam {String} school 学校
+     * @apiParam {String} signature 签名
+     * @apiParam {String} tags 标签JSON
+     * @apiParam {String} portrait 头像地址
+     * 
+     * @apiSuccess {String} Success "更新用户信息成功"
+     * @apiError {String} Failed "用户名已存在，更新失败"
+     */
     updateUser(req, resp){
         console.log("路由updateUser成功");
         var _id = req.body._id;
@@ -115,6 +152,17 @@ module.exports = {
         console.log("路由searchUser成功");
         // 用elastic research
     },
+    /**
+     * @api {post} /followUser 关注/取消关注
+     * @apiName followUser
+     * @apiGroup User
+     *
+     * @apiParam {String} follower 粉丝用户ID
+     * @apiParam {String} following 被关注用户ID
+     * 
+     * @apiSuccess {String} Success "关注成功"
+     * @apiError {String} Failed "取消关注成功"
+     */
     followUser(req, resp){
         console.log("路由followUser成功");
         var follower = req.body.follower;
@@ -128,6 +176,15 @@ module.exports = {
             }
         })
     },
+    /**
+     * @api {get} /getFollowers 获取粉丝信息列表
+     * @apiName getFollowers
+     * @apiGroup User
+     *
+     * @apiParam {String} _id 用户ID
+     * 
+     * @apiSuccess {String} Success _id portrait username signature
+     */
     getFollowers(req, resp){
         console.log("路由getFollowers成功");
         var _id = req.query._id;
@@ -141,10 +198,20 @@ module.exports = {
             })
         })
     },
+    /**
+     * @api {get} /getFollowings 获取关注的人信息列表
+     * @apiName getFollowings
+     * @apiGroup User
+     *
+     * @apiParam {String} _id 用户ID
+     * 
+     * @apiSuccess {String} Success _id portrait username signature
+     */
     getFollowings(req, resp){
         console.log("路由getFollowings成功");
         var _id = req.query._id;
 
+        // 获取用户关注的人id列表
         userDao.getUser({_id: _id}, "followings", function(err, res){
             userDao.getUsers(res.followings, "_id portrait username signature", function(err, res){
                 if(!err){

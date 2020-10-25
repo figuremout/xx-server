@@ -3,15 +3,13 @@ const NoticeModel = require('../models/Notice');
 
 module.exports = {
     /**
-     * @api {post} /userRegister 用户注册
-     * @apiName userRegister
-     * @apiGroup User
+     * @api {get} /getNotices 获取消息列表
+     * @apiName getNotices
+     * @apiGroup Notice
      *
-     * @apiParam {String} username 用户名
-     * @apiParam {String} email 用户邮箱
-     * @apiParam {String} pwd 用户密码
+     * @apiParam {String} _id 用户ID
      * 
-     * @apiSuccess {String} isSuccess 是否成功
+     * @apiSuccess {String} Success Notice
      */
     getNotices(req, resp){
         console.log("路由getNotices成功");

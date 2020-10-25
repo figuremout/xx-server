@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const userCtrl = require('../controller/userCtrl');
 const noticeCtrl = require('../controller/noticeCtrl');
@@ -11,7 +12,18 @@ router.post('/resetDB', (req, resp)=>{
     resp.send("数据库已删除");
 });
 
+// 发送文档网页
+router.get('/readme', (req, resp)=>{
+    resp.sendFile(path.resolve(__dirname+'/../doc/README.html'));
+});
+router.get('/testAPI.html', (req, resp)=>{
+    resp.sendFile(path.resolve(__dirname+'/../doc/testAPI.html'));
+});
+router.get('/apidoc/*', (req, resp)=>{
+    resp.sendFile(path.resolve(__dirname+'/../doc'+req.path));
+});
 
+// 数据接口
 router.get('/getUser', userCtrl.getUser);
 router.post('/login', userCtrl.userLogin);
 router.post('/register', userCtrl.userRegister);

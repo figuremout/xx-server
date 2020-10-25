@@ -15,8 +15,8 @@ module.exports = {
             birthDay: birthDay,
             gender: gender,
             school, school
-          }, function(err){
-            callback(err);
+          }, function(err, res){
+            callback(err, res);
         });
     },
     getUser(filter, projection, callback){

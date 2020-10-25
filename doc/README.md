@@ -1,12 +1,15 @@
-# 偕行——大学健康交友平台
-# API接口文档
-- [给前端开放的数据接口](./apidoc)
+# 偕行 服务器+数据库
+## 源码
+- [GitHub库](https://github.com/githubzjm/xx-server)
 
-# 在线测试API
+## API接口文档
+- [接口文档](./apidoc/index.html)
+
+## 在线测试API
 - [测试界面](./testAPI.html)
 
-# 数据库设计
-## users
+## 数据库设计
+### users
 > 用户信息
 
 |键|类型|默认值|API CURD|备注|
@@ -30,7 +33,7 @@
 |trends|String[]|[]|R|我的动态 各区帖子ID列表|
 |appointments|String[]|[]|R|参加的活动 参加活动列表|
 
-## chats
+### chats
 > 聊天记录信息
 
 |键|类型|默认值|API CURD|备注|
@@ -39,9 +42,9 @@
 |newMsgCount0|Number|0|UR|聊天方0新消息数目|
 |newMsgCount1|Number|0|UR|聊天方1新消息数目|
 |owners|String[]|[]|R|聊天双方 用户ID|
-|msgs|[{}]|[]|UR|聊天双方 发送的信息 按时间顺序 每个json用_id代表发言方|
+|msgs|[{}]|[]|UR|聊天双方 发送的信息 按时间顺序 [{owner: , msg: }]|
 
-## notices
+### notices
 > 提醒消息信息
 
 |键|类型|默认值|API CURD|备注|
@@ -53,7 +56,7 @@
 |where|String|""|R|在哪个板块 ["表白墙", "杂谈区", "预约区", "疏导区"]|
 |action|String|-|R|做了什么 ["赞", "回复", "关注"]|
 
-## talks
+### talks
 > 杂谈区帖子
 
 |键|类型|默认值|API CURD|备注|
@@ -65,7 +68,7 @@
 |replies|[{}]|[{date: String, content: String, supporters: []}]|R|回复列表|
 |supporters|String[]|[]|UR|点赞ID列表|
 
-## confessions
+### confessions
 > 表白墙
 
 |键|类型|默认值|API CURD|备注|
@@ -76,7 +79,7 @@
 |content|String|-|R|内容|
 |supporters|String[]|[]|UR|点赞ID列表|
 
-## appointments
+### appointments
 > 活动预约
 
 |键|类型|默认值|API CURD|备注|
@@ -91,4 +94,4 @@
 |maxParticipants|Int|-|R|最大参加人数|
 
 
-## ~~疏导区~~
+### ~~疏导区~~
