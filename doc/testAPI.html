@@ -76,6 +76,27 @@
         <button>GET</button>
     </form>
 
+    <p><b>打开聊天框测试</b></p>
+    <form action="http://www.zjmpage.com:8001/openChat" method="get">
+        sender_id: <input type="text" name="sender_id">
+        receiver_id: <input type="text" name="receiver_id">
+        <button>GET</button>
+    </form>
+
+    <p><b>获取聊天记录测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getChats" method="get">
+        _id: <input type="text" name="_id">
+        <button>GET</button>
+    </form>
+
+    <p><b>发送消息测试</b></p>
+    <form action="http://www.zjmpage.com:8001/addMsg" method="post">
+        sender_id: <input type="text" name="sender_id">
+        receiver_id: <input type="text" name="receiver_id">
+        msg: <input type="text" name="msg">
+        <button>POST</button>
+    </form>
+
     <script>
 
     </script>

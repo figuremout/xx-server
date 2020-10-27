@@ -8,7 +8,6 @@ var chatSchema = new Schema({
     msgs: {type: Array, default: []}
 });
 
-const ChatModel = mongoose.model('chat', chatSchema
-);
+const ChatModel = mongoose.model('chat', chatSchema);
 
 module.exports = ChatModel;

@@ -3,9 +3,11 @@ const path = require('path');
 const router = express.Router();
 const userCtrl = require('../controller/userCtrl');
 const noticeCtrl = require('../controller/noticeCtrl');
+const chatCtrl = require('../controller/chatCtrl');
 
 // 测试用：重置数据库
 const mongoose = require('../config/conn_mongoDB');
+
 router.post('/resetDB', (req, resp)=>{
     mongoose.connection.db.dropDatabase();
     console.log("数据库已删除")
@@ -33,5 +35,9 @@ router.get('/getFollowers', userCtrl.getFollowers);
 router.get('/getFollowings', userCtrl.getFollowings);
 
 router.get('/getNotices', noticeCtrl.getNotices);
+
+router.get('/openChat', chatCtrl.openChat);
+router.get('/getChats', chatCtrl.getChats);
+router.post('/addMsg', chatCtrl.addMsg);
 
 module.exports = router;

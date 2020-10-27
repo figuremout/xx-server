@@ -14,7 +14,7 @@ var userSchema = new Schema({
     portrait: {type: String, default: ""},
     followings: {type: [String], default: []},
     followers: {type: [String], default: []},
-    chats: {type: [String], default: []},
+    chaters: {type: [String], default: []},
     hasNewNotice: {type: Boolean, default: false},
     trends: {type: [String], default: []},
     appointments: {type: [String], default: []},

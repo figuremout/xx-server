@@ -1,9 +1,11 @@
 # 偕行 服务器+数据库
+
 ## 源码
 - [GitHub库](https://github.com/githubzjm/xx-server)
 
-## API接口文档
+## API接口文档（RPC风格）
 - [接口文档](./apidoc/index.html)
+- 聊天消息实时推送方式 1. 轮询 2. 推送
 
 ## 在线测试API
 - [测试界面](./testAPI.html)
@@ -28,7 +30,7 @@
 |以上为用户基本信息字段|--|--|--|--|
 |followings|String[]|[]|URD|正在关注 用户ID列表|
 |followers|String[]|[]|UR|关注者 用户ID列表|
-|chats|String[]|[]|URD|聊天记录 聊天记录ID列表|
+|chaters|String[]|[]|URD|聊天对象ID列表|
 |hasNewNotice|String[]|[]|UR|是否有新消息|
 |trends|String[]|[]|R|我的动态 各区帖子ID列表|
 |appointments|String[]|[]|R|参加的活动 参加活动列表|
@@ -41,7 +43,7 @@
 |_id|String|-|-|数据库自动生成的唯一索引|
 |newMsgCount0|Number|0|UR|聊天方0新消息数目|
 |newMsgCount1|Number|0|UR|聊天方1新消息数目|
-|owners|String[]|[]|R|聊天双方 用户ID|
+|owners|String[]|[]|R|聊天双方 [sender_id, receiver_id]|
 |msgs|[{}]|[]|UR|聊天双方 发送的信息 按时间顺序 [{owner: , msg: }]|
 
 ### notices
