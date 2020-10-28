@@ -13,6 +13,8 @@
         <button>POST</button>
     </form>
 
+    <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
+
     <p><b>注册测试</b></p>
     <form action="http://www.zjmpage.com:8001/register" method="post">
         phone: <input type="text" name="phone">
@@ -70,8 +72,18 @@
         <button>GET</button>
     </form>
 
+    <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
+
     <p><b>获取提醒消息测试（关注信息 点赞信息 回复信息）</b></p>
     <form action="http://www.zjmpage.com:8001/getNotices" method="get">
+        _id: <input type="text" name="_id">
+        <button>GET</button>
+    </form>
+
+    <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
+
+    <p><b>获取聊天记录测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getChats" method="get">
         _id: <input type="text" name="_id">
         <button>GET</button>
     </form>
@@ -83,12 +95,6 @@
         <button>GET</button>
     </form>
 
-    <p><b>获取聊天记录测试</b></p>
-    <form action="http://www.zjmpage.com:8001/getChats" method="get">
-        _id: <input type="text" name="_id">
-        <button>GET</button>
-    </form>
-
     <p><b>发送消息测试</b></p>
     <form action="http://www.zjmpage.com:8001/addMsg" method="post">
         sender_id: <input type="text" name="sender_id">
@@ -96,6 +102,48 @@
         msg: <input type="text" name="msg">
         <button>POST</button>
     </form>
+
+    <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
+
+    <p><b>获取推荐杂谈贴列表测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getRecommendTalks" method="get">
+        <button>GET</button>
+    </form>
+
+    <p><b>打开杂谈贴测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getTalk" method="get">
+        talkID: <input type="text" name="talkID">
+        <button>GET</button>
+    </form>
+
+    <p><b>发布杂谈贴测试</b></p>
+    <form action="http://www.zjmpage.com:8001/addTalk" method="post">
+        ownerID: <input type="text" name="ownerID">
+        content: <input type="text" name="content">
+        <button>POST</button>
+    </form>
+
+    <p><b>点赞杂谈贴测试</b></p>
+    <form action="http://www.zjmpage.com:8001/supportTalk" method="post">
+        talkID: <input type="text" name="talkID">
+        supporterID: <input type="text" name="supporterID">
+        <button>POST</button>
+    </form>
+
+    <p><b>评论杂谈贴测试</b></p>
+    <form action="http://www.zjmpage.com:8001/addReply" method="post">
+        talkID: <input type="text" name="talkID">
+        ownerID: <input type="text" name="ownerID">
+        content: <input type="text" name="content">
+        <button>POST</button>
+    </form>
+
+    <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
+
+    <form action="/" method="POST" encType="multipart/form-data">
+		<input type="file" name="file" accept="*.csv" /><br/><br/>
+		<input type="submit" value="Upload Authors" />
+	</form>
 
     <script>
 

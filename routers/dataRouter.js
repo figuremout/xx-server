@@ -7,6 +7,8 @@ const chatCtrl = require('../controller/chatCtrl');
 
 // 测试用：重置数据库
 const mongoose = require('../config/conn_mongoDB');
+const talkCtrl = require('../controller/talkCtrl');
+const { toUnicode } = require('punycode');
 
 router.post('/resetDB', (req, resp)=>{
     mongoose.connection.db.dropDatabase();
@@ -39,5 +41,12 @@ router.get('/getNotices', noticeCtrl.getNotices);
 router.get('/openChat', chatCtrl.openChat);
 router.get('/getChats', chatCtrl.getChats);
 router.post('/addMsg', chatCtrl.addMsg);
+
+router.get('/getRecommendTalks', talkCtrl.getRecommendTalks);
+router.get('/getTalk', talkCtrl.getTalk);
+router.post('/addTalk', talkCtrl.addTalk);
+router.post('/supportTalk', talkCtrl.supportTalk);
+router.post('/addReply', talkCtrl.addReply);
+
 
 module.exports = router;

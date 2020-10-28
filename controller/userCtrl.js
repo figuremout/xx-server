@@ -1,5 +1,5 @@
+const talkDao = require('../dao/talkDao');
 const userDao = require('../dao/userDao');
-const UserModel = require('../models/User');
 
 module.exports = {
     /**
@@ -219,6 +219,21 @@ module.exports = {
                 }
             })
         })
+    },
+    // TODO
+    getOwnedTalksAndConfessions(req, resp){
+        // 各自读取再按createAt排序
+        console.log("路由getTalkAndConfessions成功");
+        var ownerID = req.query.ownerID;
+        
+        talkDao.getOwnedTalks(ownerID, function(err, res){
+            // TODO getOwnedConfessions
+        })
+
+    },
+    // TODO
+    getAppointments(){
+
     }
 }
 

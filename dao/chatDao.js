@@ -35,7 +35,7 @@ module.exports = {
         )
     },
     getChat(sender_id, receiver_id, callback){
-        ChatModel.findOne({$or: [{owners: [sender_id, receiver_id]}, {owners: [receiver_id, sender_id]}]}, "", 
+        ChatModel.findOne({$or: [{owners: [sender_id, receiver_id]}, {owners: [receiver_id, sender_id]}]}, null, 
             function(err, res){
                 callback(err, res);
                 // 获取聊天后归零新消息数目
@@ -51,13 +51,13 @@ module.exports = {
                 possible_owners.push([_id, value]);
                 possible_owners.push([value, _id]);                
             });
-            ChatModel.find({owners: {$in: possible_owners}}, "", function(err, res){
+            ChatModel.find({owners: {$in: possible_owners}}, null, function(err, res){
                 var res_min = [];
                 res.forEach(function(value, index){
                     value.msgs = value.msgs.slice(-1);
                     res_min.push(value);
                 })
-                callback(err, res);
+                callback(err, res_min);
             })
         })
     }
