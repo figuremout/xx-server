@@ -1,17 +1,16 @@
 const mongoose = require('../config/conn_mongoDB')
 
 var Schema = mongoose.Schema;
-var talkSchema = new Schema({
-    ownerID: String, 
+var confessionSchema = new Schema({
+    ownerID: String,
+    ownerSchool: String,
+    school: String,
     createAt: {type: Date, default: Date.now},
     title: {type: String, default: ""},
     content: {type: String, default: ""},
-    replies: {
-        type: Array, default: []
-    },
     supporters: {type: [String], default: []}
 });
 
-const TalkModel = mongoose.model('talk', talkSchema);
+const ConfessionModel = mongoose.model('confession', confessionSchema);
 
-module.exports = TalkModel;
+module.exports = ConfessionModel;

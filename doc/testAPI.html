@@ -119,6 +119,7 @@
     <p><b>发布杂谈贴测试</b></p>
     <form action="http://www.zjmpage.com:8001/addTalk" method="post">
         ownerID: <input type="text" name="ownerID">
+        title: <input type="text" name="title">
         content: <input type="text" name="content">
         <button>POST</button>
     </form>
@@ -134,6 +135,29 @@
     <form action="http://www.zjmpage.com:8001/addReply" method="post">
         talkID: <input type="text" name="talkID">
         ownerID: <input type="text" name="ownerID">
+        content: <input type="text" name="content">
+        <button>POST</button>
+    </form>
+
+    <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
+
+    <p><b>获取推荐表白列表测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getRecommendConfessions" method="get">
+        userID: <input type="text" name="userID">
+        <button>GET</button>
+    </form>
+
+    <p><b>点赞表白测试</b></p>
+    <form action="http://www.zjmpage.com:8001/supportConfession" method="post">
+        confessionID: <input type="text" name="confessionID">
+        supporterID: <input type="text" name="supporterID">
+        <button>POST</button>
+    </form>
+
+    <p><b>发布表白测试</b></p>
+    <form action="http://www.zjmpage.com:8001/addConfession" method="post">
+        ownerID: <input type="text" name="ownerID">
+        title: <input type="text" name="title">
         content: <input type="text" name="content">
         <button>POST</button>
     </form>

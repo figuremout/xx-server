@@ -4,10 +4,11 @@ const router = express.Router();
 const userCtrl = require('../controller/userCtrl');
 const noticeCtrl = require('../controller/noticeCtrl');
 const chatCtrl = require('../controller/chatCtrl');
+const talkCtrl = require('../controller/talkCtrl');
+const confessionCtrl = require('../controller/confessionCtrl');
 
 // 测试用：重置数据库
 const mongoose = require('../config/conn_mongoDB');
-const talkCtrl = require('../controller/talkCtrl');
 const { toUnicode } = require('punycode');
 
 router.post('/resetDB', (req, resp)=>{
@@ -48,5 +49,8 @@ router.post('/addTalk', talkCtrl.addTalk);
 router.post('/supportTalk', talkCtrl.supportTalk);
 router.post('/addReply', talkCtrl.addReply);
 
+router.get('/getRecommendConfessions', confessionCtrl.getRecommendConfessions);
+router.post('/supportConfession', confessionCtrl.supportConfession);
+router.post('/addConfession', confessionCtrl.addConfession);
 
 module.exports = router;

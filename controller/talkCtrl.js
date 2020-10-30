@@ -51,9 +51,10 @@ module.exports = {
     addTalk(req, resp){
         console.log("路由addTalk成功");
         var ownerID = req.body.ownerID;
+        var title = req.body.title;
         var content = req.body.content;
 
-        talkDao.addTalk(ownerID, content, function(err, res){
+        talkDao.addTalk(ownerID, title, content, function(err, res){
             if(!err){
                 resp.send("创建杂谈贴成功");
             }

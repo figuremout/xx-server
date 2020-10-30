@@ -83,6 +83,7 @@
 |_id|String|-|-|数据库自动生成的唯一索引|
 |ownerID|String|-|R|用户ID|
 |createAt|Date|Date.now|R|帖子发布日期|
+|title|String|""|R|帖子标题|
 |content|String|""|R|帖子内容|
 |replies|[{ownerID: String, content: String, createAt: Date}]|[]|R|回复列表|
 |supporters|String[]|[]|UR|点赞ID列表|
@@ -93,8 +94,10 @@
 |键|类型|默认值|API CURD|备注|
 |--|--|--|--|--|
 |_id|String|-|-|数据库自动生成的唯一索引|
-|school|String|-|R|学校|
+|ownerID|String|-|R|用户ID|
+|ownerSchool|String|-|R|学校|
 |createAt|Date|Date.now|R|发布时间|
+|title|String|-|R|标题|
 |content|String|-|R|内容|
 |supporters|String[]|[]|UR|点赞ID列表|
 
