@@ -53,6 +53,12 @@
         <button>GET</button>
     </form>
 
+    <p><b>搜索用户测试</b></p>
+    <form action="http://www.zjmpage.com:8001/searchUsers" method="get">
+        username: <input type="text" name="username">
+        <button>GET</button>
+    </form>
+
     <p><b>关注/取消关注用户测试</b></p>
     <form action="http://www.zjmpage.com:8001/followUser" method="post">
         follower_id: <input type="text" name="follower">
@@ -163,6 +169,38 @@
     </form>
 
     <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
+
+    <p><b>获取推荐活动列表测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getRecommendAppointments" method="get">
+        userID: <input type="text" name="userID">
+        <button>GET</button>
+    </form>
+
+    <p><b>获取活动测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getAppointment" method="get">
+        appointmentID: <input type="text" name="appointmentID">
+        <button>GET</button>
+    </form>
+
+    <p><b>参加活动测试</b></p>
+    <form action="http://www.zjmpage.com:8001/attendAppointment" method="post">
+        appointmentID: <input type="text" name="appointmentID">
+        userID: <input type="text" name="userID">
+        <button>POST</button>
+    </form>
+
+    <p><b>创建活动测试</b></p>
+    <form action="http://www.zjmpage.com:8001/addAppointment" method="post">
+        ownerID: <input type="text" name="ownerID">
+        title: <input type="text" name="title">
+        content: <input type="text" name="content">
+        startDate: <input type="text" name="startDate">
+        endDate: <input type="text" name="endDate">
+        location: <input type="text" name="location">
+        maxParticipantsNum: <input type="text" name="maxParticipantsNum">
+        <button>POST</button>
+    </form>
+
 
     <form action="/" method="POST" encType="multipart/form-data">
 		<input type="file" name="file" accept="*.csv" /><br/><br/>

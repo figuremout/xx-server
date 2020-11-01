@@ -111,4 +111,15 @@ module.exports = {
             }
         })
     },
+    // TODO
+    getRecommendUsers(callback){
+        UserModel.find({}, "username gender birthDay school signature portrait", {limit: 10}, function(err, res){
+            callback(err, res);
+        })
+    },
+    searchUsers(username, callback){
+        UserModel.find({username: {$regex:username, $options:"$i"}}, "username gender school _id portrait", function(err, res){
+            callback(err, res);
+        })
+    }
 }

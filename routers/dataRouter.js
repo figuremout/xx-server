@@ -10,6 +10,7 @@ const confessionCtrl = require('../controller/confessionCtrl');
 // 测试用：重置数据库
 const mongoose = require('../config/conn_mongoDB');
 const { toUnicode } = require('punycode');
+const appointmentCtrl = require('../controller/appointmentCtrl');
 
 router.post('/resetDB', (req, resp)=>{
     mongoose.connection.db.dropDatabase();
@@ -36,6 +37,8 @@ router.post('/updateUser', userCtrl.updateUser);
 router.post('/followUser', userCtrl.followUser);
 router.get('/getFollowers', userCtrl.getFollowers);
 router.get('/getFollowings', userCtrl.getFollowings);
+router.get('/getRecommendUsers', userCtrl.getRecommendUsers);
+router.get('/searchUsers', userCtrl.searchUsers);
 
 router.get('/getNotices', noticeCtrl.getNotices);
 
@@ -52,5 +55,10 @@ router.post('/addReply', talkCtrl.addReply);
 router.get('/getRecommendConfessions', confessionCtrl.getRecommendConfessions);
 router.post('/supportConfession', confessionCtrl.supportConfession);
 router.post('/addConfession', confessionCtrl.addConfession);
+
+router.post('/addAppointment', appointmentCtrl.addAppointment);
+router.post('/attendAppointment', appointmentCtrl.attendAppointment);
+router.get('/getAppointment', appointmentCtrl.getAppointment);
+router.get('/getRecommendAppointments', appointmentCtrl.getRecommendAppointments);
 
 module.exports = router;

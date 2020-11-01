@@ -73,7 +73,7 @@
 |postID|String|""|R|相关帖子ID|
 |userID|String|-|R|是哪个用户ID|
 |where|String|""|R|在哪个板块 ["表白墙", "杂谈区", "预约区", "疏导区"]|
-|action|String|-|R|做了什么 ["赞", "回复", "关注"]|
+|action|String|-|R|做了什么 ["赞", "回复", "关注", "参加"]|
 
 ### talks
 > 杂谈区帖子
@@ -109,11 +109,12 @@
 |_id|String|-|-|数据库自动生成的唯一索引|
 |ownerID|String|-|R|用户ID|
 |title|String|-|R|标题|
-|startDate|String|-|R|起始日期|
-|endDate|String|-|R|结束日期|
+|content|String|-|R|内容|
+|startDate|String|-|R|起始日期 月/日/年|
+|endDate|String|-|R|结束日期 月/日/年|
 |location|String|-|R|地点|
-|currentParticipants|Int|-|R|当前参加人数|
-|maxParticipants|Int|-|R|最大参加人数|
+|currentParticipants|[String]|[]|R|当前参加人数|
+|maxParticipantsNum|Number|0|R|最大参加人数|
 
 
 ### ~~疏导区~~

@@ -48,7 +48,7 @@ module.exports = {
         // 表白墙推荐应该讲究范围在自己的学校或周围地区的学校，远在千里之外的学校表白应该没谁关心
         UserModel.findOne({_id: userID}, "school", function(err, res){
             var school = res.school.split(",");
-            ConfessionModel.find({}, "-ownerID", {limit: 10}, function(err, res){
+            ConfessionModel.find({}, "-ownerID", {limit: 20}, function(err, res){
                 function sortByWeight(a, b){
                     // 若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
                     // 若 a 等于 b，则返回 0。

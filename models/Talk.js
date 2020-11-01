@@ -9,7 +9,7 @@ var talkSchema = new Schema({
     replies: {
         type: Array, default: []
     },
-    supporters: {type: [String], default: []}
+    supporters: {type: [String], default: []},
 });
 
 const TalkModel = mongoose.model('talk', talkSchema);

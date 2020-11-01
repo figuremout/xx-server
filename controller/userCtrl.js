@@ -27,7 +27,7 @@ module.exports = {
         userDao.isUserExist({phone:phone}, function(err, isExist){
             if(isExist){
                 // 用户已存在
-                resp.send("用户已存在，注册失败");
+                resp.send("false");
             }else{
                 // 用户不存在
                 userDao.addUser(phone, pwd, birthDay, gender, school, function(err, res){
@@ -67,7 +67,7 @@ module.exports = {
                     }
                 })
             }else{
-                resp.send("登录失败");
+                resp.send("false");
             }
         })
     },
@@ -148,9 +148,16 @@ module.exports = {
         })
     },
     // TODO
-    searchUser(req, resp){
-        console.log("路由searchUser成功");
-        // 用elastic research
+    searchUsers(req, resp){
+        console.log("路由searchUsers成功");
+        var username = req.query.username;
+        // 用elastic research?
+        userDao.searchUsers(username, function(err, res){
+            if(!err){
+                resp.send(res);
+            }
+        })
+
     },
     /**
      * @api {post} /followUser 关注/取消关注
@@ -234,6 +241,14 @@ module.exports = {
     // TODO
     getAppointments(){
 
+    },
+    // TODO
+    getRecommendUsers(req, resp){
+        userDao.getRecommendUsers(function(err, res){
+            if(!err){
+                resp.send(res);
+            }
+        })
     }
 }
 
