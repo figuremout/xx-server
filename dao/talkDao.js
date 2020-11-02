@@ -87,9 +87,7 @@ module.exports = {
      * @description 获取一个用户发布的所有杂谈贴，不包含回复 点赞 内容信息
      */
     getOwnedTalks(ownerID, callback){
-        // 按时间
-        // TODO 默认按创建顺序从旧到新添加入表中的，待验证，免得排序耗时
-        TalkModel.find({ownerID: ownerID}, "-replies -supporters -content", function(err, res){
+        TalkModel.find({ownerID: ownerID}, "-replies -supporters -content -ownerID", function(err, res){
             callback(err, res);
         })
     },

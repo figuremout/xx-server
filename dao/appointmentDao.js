@@ -85,9 +85,10 @@ module.exports = {
             callback(err, res);
         })
     },
-    // TODO
-    getOwnedAppointments(){
-
+    getOwnedAppointments(ownerID, callback){
+        AppointmentModel.find({ownerID: ownerID}, "title createAt currentParticipants maxParticipantsNum", function(err, res){
+            callback(err, res);
+        })
     }
 
 }

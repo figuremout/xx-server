@@ -1,3 +1,5 @@
+const appointmentDao = require('../dao/appointmentDao');
+const confessionDao = require('../dao/confessionDao');
 const talkDao = require('../dao/talkDao');
 const userDao = require('../dao/userDao');
 
@@ -114,6 +116,7 @@ module.exports = {
     updateUser(req, resp){
         console.log("路由updateUser成功");
         var _id = req.body._id;
+        var phone = req.body.phone;
         var username = req.body.username;
         var pwd = req.body.pwd;
         var birthDay = req.body.birthDay;
@@ -136,22 +139,21 @@ module.exports = {
             }
         }
 
-        userDao.updateUser({_id: _id}, doc, function(err, isSuccess){
+        userDao.updateUser({$or: [{_id: _id}, {phone: phone}]}, doc, function(err, isSuccess){
             if(!err){
                 console.log("updateUser成功");
                 if(isSuccess){
                     resp.send("更新用户信息成功");
                 }else{
-                    resp.send("用户名已存在，更新失败");
+                    // 用户名已存在
+                    resp.send("false");
                 }
             }
         })
     },
-    // TODO
     searchUsers(req, resp){
         console.log("路由searchUsers成功");
         var username = req.query.username;
-        // 用elastic research?
         userDao.searchUsers(username, function(err, res){
             if(!err){
                 resp.send(res);
@@ -227,20 +229,40 @@ module.exports = {
             })
         })
     },
-    // TODO
     getOwnedTalksAndConfessions(req, resp){
         // 各自读取再按createAt排序
         console.log("路由getTalkAndConfessions成功");
         var ownerID = req.query.ownerID;
         
         talkDao.getOwnedTalks(ownerID, function(err, res){
-            // TODO getOwnedConfessions
+            var talks = res;
+            confessionDao.getOwnedConfessions(ownerID, function(err, res){
+                var confessions = res;
+                var total = talks.concat(confessions);
+                function sortByDate(a, b){
+                    // 若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+                    // 若 a 等于 b，则返回 0。
+                    // 若 a 大于 b，则返回一个大于 0 的值。
+    
+                    return (Date.parse(b.createAt)-Date.parse(a.createAt));
+                }
+                total.sort(sortByDate);
+                resp.send(total);
+            })
         })
 
     },
-    // TODO
-    getAppointments(){
-
+    getOwnedAppointments(req, resp){
+        var ownerID = req.query.ownerID;
+        appointmentDao.getOwnedAppointments(ownerID, function(err, res){
+            function sortByDate(a, b){
+                // 若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+                // 若 a 等于 b，则返回 0。
+                // 若 a 大于 b，则返回一个大于 0 的值。
+                return (Date.parse(b.createAt)-Date.parse(a.createAt));
+            }
+            resp.send(res.sort(sortByDate));
+        })
     },
     // TODO
     getRecommendUsers(req, resp){

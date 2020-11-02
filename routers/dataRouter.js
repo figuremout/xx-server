@@ -39,6 +39,8 @@ router.get('/getFollowers', userCtrl.getFollowers);
 router.get('/getFollowings', userCtrl.getFollowings);
 router.get('/getRecommendUsers', userCtrl.getRecommendUsers);
 router.get('/searchUsers', userCtrl.searchUsers);
+router.get('/getOwnedTalksAndConfessions', userCtrl.getOwnedTalksAndConfessions);
+router.get('/getOwnedAppointments', userCtrl.getOwnedAppointments);
 
 router.get('/getNotices', noticeCtrl.getNotices);
 

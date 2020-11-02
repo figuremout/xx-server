@@ -36,9 +36,7 @@ module.exports = {
         })
     },
     getOwnedConfessions(ownerID, callback){
-        // 按时间
-        // TODO 默认按创建顺序从旧到新添加入表中的，待验证，免得排序耗时
-        ConfessionModel.find({ownerID: ownerID}, "-ownerSchool -supporters -content -ownerID", function(err, res){
+        ConfessionModel.find({ownerID: ownerID}, "-supporters -content -ownerID", function(err, res){
             callback(err, res);
         })
     },

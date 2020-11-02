@@ -78,6 +78,18 @@
         <button>GET</button>
     </form>
 
+    <p><b>获取用户动态（杂谈贴 表白）测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getOwnedTalksAndConfessions" method="get">
+        ownerID: <input type="text" name="ownerID">
+        <button>GET</button>
+    </form>
+
+    <p><b>获取用户活动测试</b></p>
+    <form action="http://www.zjmpage.com:8001/getOwnedAppointments" method="get">
+        ownerID: <input type="text" name="ownerID">
+        <button>GET</button>
+    </form>
+
     <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
 
     <p><b>获取提醒消息测试（关注信息 点赞信息 回复信息）</b></p>
@@ -200,6 +212,8 @@
         maxParticipantsNum: <input type="text" name="maxParticipantsNum">
         <button>POST</button>
     </form>
+
+    <span style="width: 70%; height: 5px; display: inline-block; background-color: rgb(172, 169, 169); margin-top: 50px;" ></span>
 
 
     <form action="/" method="POST" encType="multipart/form-data">
