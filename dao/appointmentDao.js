@@ -66,8 +66,7 @@ module.exports = {
                             b_school_weight += 1;
                         }
                     });
-    
-                    // TODO 权重设计
+
                     var a_weight = a_date_weight + a_school_weight;
                     var b_weight = b_date_weight + b_school_weight;
     

@@ -12,11 +12,11 @@ module.exports = {
      * @apiParam {String} phone 电话号码
      * @apiParam {String} pwd 密码
      * @apiParam {String} birthDay 生日
-     * @apiParam {String} gender 性别
-     * @apiParam {String} school 学校
+     * @apiParam {String="m", "f"} gender 性别
+     * @apiParam {String="省,市,校名"} school 学校
      * 
-     * @apiSuccess {String} RegisterSuccess Register"注册成功"
-     * @apiError {String} RegisterFailed "用户已存在，注册失败"
+     * @apiSuccess {String} Success "注册成功"
+     * @apiSuccess {String} Failed "false" 用户已存在
      */
     userRegister(req, resp){
         console.log("路由userRegister成功");
@@ -36,7 +36,6 @@ module.exports = {
                     if(!err){
                         // 初始化每个新用户username为_id
                         userDao.updateUser({phone: phone}, {username: res._id}, function(err, isSuccess){})
-                        console.log("用户插入成功");
                         resp.send("注册成功");
                     }
                 });
@@ -52,8 +51,8 @@ module.exports = {
      * @apiParam {String} phone 电话号码
      * @apiParam {String} pwd 密码
      * 
-     * @apiSuccess {String} LoginSuccess _id
-     * @apiError {String} LoginFailed "登录失败"
+     * @apiSuccess {String} Success _id
+     * @apiSuccess {String} Failed "登录失败"
      */
     userLogin(req, resp){
         console.log("路由userLogin成功");
@@ -101,17 +100,18 @@ module.exports = {
      * @apiGroup User
      *
      * @apiParam {String} _id 用户ID
-     * @apiParam {String} username 用户名
-     * @apiParam {String} pwd 密码
-     * @apiParam {String} birthDay 生日
-     * @apiParam {String} gender 性别
-     * @apiParam {String} school 学校
-     * @apiParam {String} signature 签名
-     * @apiParam {String} tags 标签JSON
-     * @apiParam {String} portrait 头像地址
+     * @apiParam {String} phone 用户电话
+     * @apiParam {String} [username] 用户名
+     * @apiParam {String} [pwd] 密码
+     * @apiParam {String} [birthDay] 生日
+     * @apiParam {String} [gender] 性别
+     * @apiParam {String} [school] 学校
+     * @apiParam {String} [signature] 签名
+     * @apiParam {String} [tags] 标签JSON
+     * @apiParam {String} [portrait] 头像地址
      * 
      * @apiSuccess {String} Success "更新用户信息成功"
-     * @apiError {String} Failed "用户名已存在，更新失败"
+     * @apiSuccess {String} Failed "false" 用户名已存在
      */
     updateUser(req, resp){
         console.log("路由updateUser成功");
@@ -151,6 +151,15 @@ module.exports = {
             }
         })
     },
+    /**
+     * @api {get} /searchUsers 搜索用户
+     * @apiName searchUsers
+     * @apiGroup User
+     *
+     * @apiParam {String} username 用户名
+     * 
+     * @apiSuccess {String} Success username gender school _id portrait
+     */
     searchUsers(req, resp){
         console.log("路由searchUsers成功");
         var username = req.query.username;
@@ -170,7 +179,7 @@ module.exports = {
      * @apiParam {String} following 被关注用户ID
      * 
      * @apiSuccess {String} Success "关注成功"
-     * @apiError {String} Failed "取消关注成功"
+     * @apiSuccess {String} Failed "取消关注成功"
      */
     followUser(req, resp){
         console.log("路由followUser成功");
@@ -229,6 +238,15 @@ module.exports = {
             })
         })
     },
+    /**
+     * @api {get} /getOwnedTalksAndConfessions 获取拥有的杂谈贴和表白
+     * @apiName getOwnedTalksAndConfessions
+     * @apiGroup User
+     *
+     * @apiParam {String} ownerID 用户ID
+     * 
+     * @apiSuccess {String} Success 表白帖：ownerSchool createAt title 杂谈贴：createAt title
+     */
     getOwnedTalksAndConfessions(req, resp){
         // 各自读取再按createAt排序
         console.log("路由getTalkAndConfessions成功");
@@ -243,15 +261,22 @@ module.exports = {
                     // 若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
                     // 若 a 等于 b，则返回 0。
                     // 若 a 大于 b，则返回一个大于 0 的值。
-    
                     return (Date.parse(b.createAt)-Date.parse(a.createAt));
                 }
                 total.sort(sortByDate);
                 resp.send(total);
             })
         })
-
     },
+    /**
+     * @api {get} /getOwnedAppointments 获取拥有的活动预约
+     * @apiName getOwnedAppointments
+     * @apiGroup User
+     *
+     * @apiParam {String} ownerID 用户ID
+     * 
+     * @apiSuccess {String} Success title createAt currentParticipants maxParticipantsNum
+     */
     getOwnedAppointments(req, resp){
         var ownerID = req.query.ownerID;
         appointmentDao.getOwnedAppointments(ownerID, function(err, res){
@@ -265,6 +290,13 @@ module.exports = {
         })
     },
     // TODO
+    /**
+     * @api {get} /getRecommendUsers 获取推荐用户列表
+     * @apiName getRecommendUsers
+     * @apiGroup User
+     *
+     * @apiSuccess {String} Success username gender birthDay school signature portrait
+     */
     getRecommendUsers(req, resp){
         userDao.getRecommendUsers(function(err, res){
             if(!err){

@@ -36,13 +36,12 @@ module.exports = {
         })
     },
     getOwnedConfessions(ownerID, callback){
-        ConfessionModel.find({ownerID: ownerID}, "-supporters -content -ownerID", function(err, res){
+        ConfessionModel.find({ownerID: ownerID}, "ownerSchool createAt title", function(err, res){
             callback(err, res);
         })
     },
     getRecommendConfessions(userID, callback){
         // 按发布时间 回复数 点赞数排序
-        // TODO 是否要加推荐算法？
         // 表白墙推荐应该讲究范围在自己的学校或周围地区的学校，远在千里之外的学校表白应该没谁关心
         UserModel.findOne({_id: userID}, "school", function(err, res){
             var school = res.school.split(",");
@@ -71,8 +70,7 @@ module.exports = {
                             b_school_weight += 12; // 权重：学校字符串中一个字段相同=12赞=1h新鲜度 
                         }
                     });
-    
-                    // TODO 权重设计
+
                     var a_weight = a_supporters_len + a_date_weight + a_school_weight;
                     var b_weight = b_supporters_len + b_date_weight + b_school_weight;
     

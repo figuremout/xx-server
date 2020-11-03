@@ -1,6 +1,17 @@
 const chatDao = require('../dao/chatDao');
 
 module.exports = {
+    /**
+     * @api {post} /addMsg 发送消息
+     * @apiName addMsg
+     * @apiGroup Chat
+     *
+     * @apiParam {String} sender_id 发送方ID
+     * @apiParam {String} receiver_id 接收方ID
+     * @apiParam {String} msg 内容
+     * 
+     * @apiSuccess {String} Success "消息发送成功"
+     */
     addMsg(req, resp){
         console.log("路由addMsg成功");
         var sender_id = req.body.sender_id;
@@ -13,6 +24,16 @@ module.exports = {
             }
         })
     },
+    /**
+     * @api {get} /openChat 打开聊天框（初始化/获取聊天记录）
+     * @apiName openChat
+     * @apiGroup Chat
+     *
+     * @apiParam {String} sender_id 发送方ID
+     * @apiParam {String} receiver_id 接收方ID
+     * 
+     * @apiSuccess {String} Success null
+     */
     openChat(req, resp){
         console.log("路由openChat成功");
         var sender_id = req.query.sender_id;
@@ -31,6 +52,15 @@ module.exports = {
             }
         })
     },
+    /**
+     * @api {get} /getChats 获取聊天列表
+     * @apiName getChats
+     * @apiGroup Chat
+     *
+     * @apiParam {String} _id 用户ID
+     * 
+     * @apiSuccess {String} Success 聊天内容只返回最后一句
+     */
     getChats(req, resp){
         console.log("路由getChats成功");
         var _id = req.query._id;

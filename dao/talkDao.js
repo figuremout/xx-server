@@ -2,13 +2,7 @@
 const TalkModel = require('../models/Talk');
 
 module.exports = {
-    /**
-     * 
-     * @param {String} ownerID 
-     * @param {String} content 
-     * @param {Function} callback
-     * @description 创建一条杂谈帖 
-     */
+    // 创建一条杂谈帖 
     addTalk(ownerID, title, content, callback){
         TalkModel.create({
             ownerID: ownerID,
@@ -18,14 +12,7 @@ module.exports = {
             callback(err, res);
         });
     },
-    /**
-     * 
-     * @param {String} talkID 
-     * @param {String} ownerID 
-     * @param {String} content 
-     * @param {Function} callback 
-     * @description 将评论添加到杂谈贴中，并提醒帖子的主人
-     */
+    // 将评论添加到杂谈贴中，并提醒帖子的主人
     addReply(talkID, ownerID, content, callback){
         var reply = {ownerID: ownerID, content: content, createAt: Date()};
         TalkModel.findOneAndUpdate(
@@ -43,13 +30,7 @@ module.exports = {
             }
         )
     },
-    /**
-     * 
-     * @param {String} talkID 
-     * @param {String} supporterID 
-     * @param {Function} callback 
-     * @description 已点赞转为未点赞 未点赞转为已点赞并提醒被点赞帖子主人
-     */
+    // 已点赞转为未点赞 未点赞转为已点赞并提醒被点赞帖子主人
     supportTalk(talkID, supporterID, callback){
         TalkModel.findOne({_id: talkID}, "supporters ownerID _id", function(err, res){
             if (res.supporters.includes(supporterID)){
@@ -69,36 +50,21 @@ module.exports = {
             }
         })
     },
-    /**
-     * 
-     * @param {String} talkID 
-     * @param {Function} callback
-     * @description 获取一条杂谈贴 
-     */
+    // 获取一条杂谈贴 
     getTalk(talkID, callback){
         TalkModel.findOne({_id: talkID}, null, function(err, res){
             callback(err, res);
         })
     },
-    /**
-     * 
-     * @param {String} ownerID 
-     * @param {Function} callback
-     * @description 获取一个用户发布的所有杂谈贴，不包含回复 点赞 内容信息
-     */
+    // 获取一个用户发布的所有杂谈贴，不包含回复 点赞 内容信息
     getOwnedTalks(ownerID, callback){
-        TalkModel.find({ownerID: ownerID}, "-replies -supporters -content -ownerID", function(err, res){
+        TalkModel.find({ownerID: ownerID}, "createAt title", function(err, res){
             callback(err, res);
         })
     },
-    /**
-     * 
-     * @param {Function} callback
-     * @description 返回10条按发布时间 回复数 点赞数加权排序的推荐杂谈贴列表 
-     */
+    // 返回10条按发布时间 回复数 点赞数加权排序的推荐杂谈贴列表 
     getRecommendTalks(callback){
         // 按发布时间 回复数 点赞数排序
-        // TODO 是否要加推荐算法？
         // 杂谈帖推荐应该讲究范围广 内容丰富，不应该只局限于自己的学校或地区
         TalkModel.find({}, "-content", {limit: 10}, function(err, res){
             function sortByWeight(a, b){
@@ -113,7 +79,6 @@ module.exports = {
                 var b_supporters_len = b.supporters.length;
                 var b_date_weight = Date.parse(b.createAt)/300000; // 距离1970年1月1日午夜的毫秒数
 
-                // TODO 权重设计
                 var a_weight = a_replies_len*2 + a_supporters_len + a_date_weight; // 用户回复需要的精力更多，赋予更多权重
                 var b_weight = b_replies_len*2 + b_supporters_len + b_date_weight;
 

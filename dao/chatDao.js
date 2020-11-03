@@ -4,25 +4,13 @@ const ChatModel = require('../models/Chat');
 const UserModel = require('../models/User');
 
 module.exports = {
-    /**
-     * 
-     * @param {String} owner0 
-     * @param {String} owner1
-     * @param {Function} callback 
-     * @description 判断聊天双方的聊天框数据是否已存在
-     */
+    // 判断聊天双方的聊天框数据是否已存在
     isChatExist(owner0, owner1, callback){
         ChatModel.exists({$or: [{owners: [owner0, owner1]}, {owners: [owner1, owner0]}]}, function(err, res){
             callback(err, res);
         })
     },
-    /**
-     * 
-     * @param {String} owner0 
-     * @param {String} owner1 
-     * @param {Function} callback 
-     * @description 创建一条聊天框数据，并更新聊天双方的chaters字段
-     */
+    // 创建一条聊天框数据，并更新聊天双方的chaters字段
     initChat(owner0, owner1, callback){
         ChatModel.create({
             owners: [owner0, owner1],
@@ -33,14 +21,7 @@ module.exports = {
             UserModel.updateOne({_id: owner1}, {$addToSet: {chaters: owner0}}, function(err, res){});
         });
     },
-    /**
-     * 
-     * @param {String} sender_id 
-     * @param {String} receiver_id 
-     * @param {String} msg 
-     * @param {Function} callback 
-     * @description 添加信息到聊天框内，并将相应的newMsgCount字段增1
-     */
+    // 添加信息到聊天框内，并将相应的newMsgCount字段增1
     addMsg(sender_id, receiver_id, msg, callback){
         ChatModel.findOneAndUpdate(
             {$or: [{owners: [sender_id, receiver_id]}, {owners: [receiver_id, sender_id]}]}, 
@@ -55,13 +36,7 @@ module.exports = {
             }
         )
     },
-    /**
-     * 
-     * @param {String} sender_id 
-     * @param {String} receiver_id 
-     * @param {Function} callback
-     * @description 获取聊天框，并归零相应的newMsgCount字段 
-     */
+    // 获取聊天框，并归零相应的newMsgCount字段 
     getChat(sender_id, receiver_id, callback){
         ChatModel.findOne({$or: [{owners: [sender_id, receiver_id]}, {owners: [receiver_id, sender_id]}]}, null, 
             function(err, res){
@@ -72,12 +47,7 @@ module.exports = {
             }
         )
     },
-    /**
-     * 
-     * @param {String} _id 
-     * @param {Function} callback
-     * @description 获取某个用户的所有聊天记录，并只返回每项聊天记录的最后一条消息 
-     */
+    // 获取某个用户的所有聊天记录，并只返回每项聊天记录的最后一条消息 
     getChats(_id, callback){
         UserModel.findOne({_id: _id}, "chaters", function(err, res){
             var possible_owners = [];

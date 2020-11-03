@@ -9,7 +9,7 @@ module.exports = {
      *
      * @apiParam {String} _id 用户ID
      * 
-     * @apiSuccess {String} Success Notice
+     * @apiSuccess {String} Success null
      */
     getNotices(req, resp){
         console.log("路由getNotices成功");
