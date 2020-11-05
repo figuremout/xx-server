@@ -28,8 +28,8 @@ module.exports = {
      * @apiParam {String} confessionID 表白帖ID
      * @apiParam {String} supporterID 点赞者ID
      * 
-     * @apiSuccess {String} Success "点赞成功"
-     * @apiSuccess {String} Success "取消点赞成功"
+     * @apiSuccess {String} 1 "点赞成功"
+     * @apiSuccess {String} 2 "取消点赞成功"
      */
     supportConfession(req, resp){
         console.log("路由supportConfession成功");

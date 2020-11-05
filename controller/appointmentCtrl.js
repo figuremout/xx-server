@@ -40,9 +40,9 @@ module.exports = {
      * @apiParam {String} appointmentID 活动ID
      * @apiParam {String} userID 用户ID
      * 
-     * @apiSuccess {String} Success "成功参加"
-     * @apiSuccess {String} Success "成功取消参加"
-     * @apiSuccess {String} Success "参加失败，人数已满"
+     * @apiSuccess {String} 1 "成功参加"
+     * @apiSuccess {String} 2 "成功取消参加"
+     * @apiSuccess {String} Failed "参加失败，人数已满"
      */
     attendAppointment(req, resp){
         console.log("路由attendAppointment成功");

@@ -45,8 +45,8 @@ module.exports = {
      * @apiParam {String} talkID 杂谈贴ID
      * @apiParam {String} supporterID 点赞者ID
      * 
-     * @apiSuccess {String} Success "点赞成功"
-     * @apiSuccess {String} Success "取消点赞成功"     
+     * @apiSuccess {String} 1 "点赞成功"
+     * @apiSuccess {String} 2 "取消点赞成功"     
      */
     supportTalk(req, resp){
         console.log("路由supportTalk成功");

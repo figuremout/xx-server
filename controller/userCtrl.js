@@ -178,8 +178,8 @@ module.exports = {
      * @apiParam {String} follower 粉丝用户ID
      * @apiParam {String} following 被关注用户ID
      * 
-     * @apiSuccess {String} Success "关注成功"
-     * @apiSuccess {String} Failed "取消关注成功"
+     * @apiSuccess {String} 1 "关注成功"
+     * @apiSuccess {String} 2 "取消关注成功"
      */
     followUser(req, resp){
         console.log("路由followUser成功");

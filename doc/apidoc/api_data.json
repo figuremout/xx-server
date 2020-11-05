@@ -110,8 +110,22 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "Success",
+            "field": "1",
             "description": "<p>&quot;成功参加&quot;</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "2",
+            "description": "<p>&quot;成功取消参加&quot;</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Failed",
+            "description": "<p>&quot;参加失败，人数已满&quot;</p>"
           }
         ]
       }
@@ -440,8 +454,15 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "Success",
+            "field": "1",
             "description": "<p>&quot;点赞成功&quot;</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "2",
+            "description": "<p>&quot;取消点赞成功&quot;</p>"
           }
         ]
       }
@@ -678,8 +699,15 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "Success",
+            "field": "1",
             "description": "<p>&quot;点赞成功&quot;</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "2",
+            "description": "<p>&quot;取消点赞成功&quot;</p>"
           }
         ]
       }
@@ -721,14 +749,14 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "Success",
+            "field": "1",
             "description": "<p>&quot;关注成功&quot;</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "Failed",
+            "field": "2",
             "description": "<p>&quot;取消关注成功&quot;</p>"
           }
         ]
