@@ -1,0 +1,5 @@
+# jupyterLab
+.ipynb_checkpoints/
+
+# vscode
+.vscode/
