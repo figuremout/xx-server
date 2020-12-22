@@ -75,7 +75,7 @@ module.exports = {
     },
     // TODO
     getRecommendUsers(callback){
-        UserModel.find({}, "username gender birthDay school signature portrait", {limit: 10}, function(err, res){
+        UserModel.find({}, "_id username gender birthDay school signature portrait", {limit: 10}, function(err, res){
             callback(err, res);
         })
     },

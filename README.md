@@ -4,11 +4,11 @@
 - [GitHub](https://github.com/githubzjm/xx-server)
 
 ## API接口文档（RPC风格）
-- [接口文档](./apidoc/index.html)
+- [接口文档](http://www.zjmpage.site:8001/apidoc/index.html)
 - 聊天消息实时推送方式 1. 轮询 2. 推送
 
 ## 在线测试API
-- [测试界面](./testAPI.html)
+- [测试界面](http://www.zjmpage.site:8001/testAPI.html)
 
 ## 数据库设计
 ### users
